@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Simular Economia de Energia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .simulacao-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            background-color: #e0ffe0;
+            padding: 10px;
+            border-radius: 8px;
+            display: {% if resultado %} block {% else %} none {% endif %};
+        }
+
+        .botao-pdf {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .botao-pdf:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Simulador de Economia de Energia</h2>
+
+    <div class="simulacao-container">
+        <form method="POST">
+            <label><input type="checkbox" name="habitos" value="led"> 💡 Usar lâmpadas LED</label>
+            <label><input type="checkbox" name="habitos" value="banho"> 🚿 Banhos de até 5 minutos</label>
+            <label><input type="checkbox" name="habitos" value="luz"> 📴 Apagar luzes ao sair</label>
+            <label><input type="checkbox" name="habitos" value="tomadas"> 🔌 Desligar aparelhos da tomada</label>
+            <label><input type="checkbox" name="habitos" value="natural"> 🌞 Aproveitar luz natural</label>
+
+            <label for="valor_conta">Valor da conta de luz (R$):</label>
+            <input type="number" step="0.01" name="valor_conta" id="valor_conta" required>
+
+            <button type="submit">Calcular Economia</button>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado">
+                <h3>Resultado da Economia de Energia</h3>
+                <p>Valor da conta de luz: <strong>R$ {{ valor_conta }}</strong></p>
+                <p>Economia estimada (20%): <strong>R$ {{ economia }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

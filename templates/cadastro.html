@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <section>
+    <h2>Cadastro Inicial</h2>
+    <form method="POST">
+      <label>Nome: *Não Obrigatório*</label>
+      <input type="text" name="nome">
+
+      <label>Idade:</label>
+      <input type="number" name="idade" required>
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+</body>
+</html>

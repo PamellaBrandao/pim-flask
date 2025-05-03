@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma de Inclusão Digital</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 style="margin-bottom: 20px;">
+        {% if nome and nome != 'Visitante' %}
+          Olá {{ nome }}, o que gostaria de aprender hoje? 👩‍💻
+        {% else %}
+          Olá! Seja bem-vindo(a) à plataforma TECH FOR ALL 👋
+        {% endif %}
+      </h1>
+      <h1>🌐 TECH FOR ALL</h1>
+      <ul>
+        <li><a href="#home">🏠 Home</a></li>
+        <li><a href="#cursos">📚 Cursos</a></li>
+        <li><a href="#materiais">📂 Materiais</a></li>
+        <li><a href="#estatisticas">📊 Estatísticas</a></li>
+        <li><a href="#simulador-energia">💡 Energia</a></li>
+        <li><a href="#seguranca">🔐 Boas Práticas</a></li>
+        <li><a href="#lgpd">📜 LGPD</a></li>
+        <li><a href="#contato">📬 Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" style="text-align: center; padding: 2rem;">
+    <h2>🚀 Bem-vindo à <strong>Tech for All</strong>!</h2>
+    <p style="max-width: 700px; margin: auto; font-size: 1.2rem;">
+      Uma plataforma dedicada à inclusão digital segura, cidadania e responsabilidade online. <br>
+      Aqui você aprende como navegar com segurança, proteger seus dados, consumir energia de forma consciente e muito mais. 💻🔐⚡<br><br>
+      Desenvolvido por <strong>Pamella Brandão</strong> e <strong>Matheus Nicastro</strong> para um futuro mais acessível e seguro.
+    </p>
+  </section>
+
+
+  <section id="cursos">
+    <h2>📚 Cursos Oferecidos</h2>
+    <ul>
+      <li>🧠 Vídeo Aula Pensamento Lógico Computacional</li>
+      <li>🐍 Vídeo Aula Programação em Python</li>
+      <li>🔐 Vídeo Aula Segurança Digital e Cidadania</li>
+       <li> 🖥️Cartilha Segurança Digital</li>
+        <li> ♻️Slides Ética, Cidadania e Sustentabilidade e Atividade Interativa</li>
+         <li> 🛡️Slides Lei Geral de Proteção de Dados</li>
+         <li> 📩Infográfico Segurança Digital</li>
+         <li> 🌱Questionário de Sustentabilidade</li>
+    </ul>
+  </section>
+
+  <section id="materiais">
+    <h2>📂 Materiais Educativos</h2>
+    <p>
+      <a href="{{ url_for('static', filename='materiais/cartilha.pdf') }}" target="_blank" class="botao-pdf">📘 Cartilha sobre Segurança Digital</a>
+    </p>
+    <p>
+      <a href="https://www.youtube.com/@ONGTECHFORALL" target="_blank" class="botao-pdf">▶️ Vídeo Aulas YouTube</a>
+    </p>
+  </section>
+
+<section id="simulador-energia" style="text-align: center; padding: 2rem;">
+    <h2>💡 Economia de Energia e Sustentabilidade</h2>
+    <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">
+      Sabia que pequenas atitudes podem fazer grande diferença na sua conta de luz e no meio ambiente? 🌱 <br>
+      Usar equipamentos com menor consumo, evitar o desperdício e descartar corretamente eletrônicos ajuda a economizar e proteger o planeta. 🌍
+
+  <h3>📘SAIBA MAIS</h3>
+
+  <iframe 
+    src="{{ url_for('static', filename='materiais/apresentacao.pdf') }}#toolbar=0"  
+    style="width:100%; aspect-ratio: 16/9;"></iframe>
+  </p>
+
+    <br>  <a href="/simular_energia" class="botao-pdf">🔍 Acesse nosso Simulador de Economia</a> <a href="/questionario"><button">Questionário de Sustentabilidade></a>
+    </p>
+  </section>
+
+  <section id="seguranca">
+    <h2>🔐 Boas Práticas de Segurança Digital</h2>
+    <p style="max-width: 700px; margin: 20px auto; font-size: 1.1rem; text-align: center;">
+      Em um mundo cada vez mais conectado, entender e praticar a segurança digital se tornou essencial para proteger nossos dados e nossa privacidade.🔐 <br>
+Ao aprender boas práticas, como criar senhas fortes, evitar golpes e manter seus dispositivos seguros, você se torna mais preparado para navegar na internet de forma consciente e protegida.🔎📩 <br> <br>
+
+<strong> Quer saber mais?👀 </strong> <br>
+<strong>Clique na imagem abaixo e acesse conteúdos exclusivos do nosso curso, onde explicamos de forma simples e detalhada o que é segurança digital e como você pode se proteger no dia a dia!🖥️🔒</strong> <br>
+    
+    <!-- Imagem interativa com link para a cartilha -->
+  <a href="{{ url_for('static', filename='materiais/cartilha.pdf') }}" target="_blank">
+    <img src="{{ url_for('static', filename='img/segurança-digital.jpeg') }}" alt="Infografico Segurança Digital" style="display: block; margin: 30px auto; max-width: 40%;">
+  </a>
+  </section>
+
+<section id="lgpd">
+  <h2>📜 Política de Privacidade - LGPD</h2>
+  <p style="max-width: 700px; margin: 20px auto; font-size: 1.1rem; text-align: center;">
+    Seus dados pessoais são tratados com total responsabilidade e protegidos conforme os princípios da <strong>Lei Geral de Proteção de Dados (LGPD)</strong>. 🔒<br>
+    Garantimos transparência, segurança e controle sobre suas informações. <br>
+     Você é protagonista da sua privacidade! <br> <br> <strong> Clique na imagem abaixo e saiba mais.</strong>🧾✅
+  </p>
+  
+  <!-- Imagem interativa com link para a cartilha -->
+  <a href="{{ url_for('static', filename='materiais/cartilha_lgpd.pdf') }}" target="_blank">
+    <img src="{{ url_for('static', filename='img/infografico-lgpd.png') }}" alt="Infográfico sobre LGPD" style="display: block; margin: 20px auto; max-width: 30%;">
+  </a>
+</section>
+
+<section id="estatisticas">
+  <h2>📊 Gostaria de saber quanto tempo nossos usuários dedicam aos estudos?</h2> 
+
+  <div class="container-grafico">
+    <canvas id="graficoUso"></canvas>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('graficoUso').getContext('2d');
+    const grafico = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Menores de 18', 'Entre 18 e 50', 'Maiores de 50'],
+        datasets: [{
+          label: 'Tempo médio de acesso (min)',
+          data: [{{ media_faixas['Menores de 18'] }}, {{ media_faixas['Entre 18 e 50'] }}, {{ media_faixas['Maiores de 50'] }}],
+          backgroundColor: ['#00aaff', '#ffaa00', '#cc33ff'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: { enabled: true },
+          title: {
+            display: true,
+            text: 'TEMPO MÉDIO DE USO DA TECH FOR ALL',
+            font: {
+              size: 18
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Minutos'
+            },
+            ticks: { stepSize: 10 }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Faixa Etária'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</section>
+
+  <section id="contato">
+    <h2>📬 Contato</h2>
+    <p>Email: contacto.tech.for.all@gmail.com</p>
+    <p>GitHub: <a href="https://github.com/PamellaBrandao">/PamellaBrandao</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 TECH FOR ALL - Todos os direitos reservados.</p>
+  </footer>
+
+  {% if media_faixas %}
+  <script>
+    const ctx = document.getElementById('graficoFaixas').getContext('2d');
+    const grafico = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ media_faixas.keys() | list | tojson }},
+        datasets: [{
+          label: 'Tempo médio de acesso (min)',
+          data: {{ media_faixas.values() | list | tojson }},
+          backgroundColor: ['#00aaff', '#ffaa00', '#aa00ff'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Tempo Médio por Faixa Etária',
+            font: {
+              size: 18
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Minutos'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Faixa Etária'
+            }
+          }
+        }
+      }
+    });
+  </script>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário - Tech For All</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <section>
+        <h2>📝 Questionário - Tech For All</h2>
+        <form action="/enviar_respostas" method="POST" class="questionario">
+            <label for="pergunta1">1️⃣ Você já aprendeu na Tech for All sobre como economizar energia usando a tecnologia de forma consciente?</label>
+            <label><input type="radio" name="pergunta1" value="Sim"> Sim</label>
+            <label><input type="radio" name="pergunta1" value="Não"> Não</label>
+
+            <label for="pergunta2">2️⃣ Você já usou ou conheceu algum computador ou celular que foi reaproveitado ou doado?</label>
+            <label><input type="radio" name="pergunta2" value="Sim, já usei"> Sim, já usei</label>
+            <label><input type="radio" name="pergunta2" value="Já conheci, mas não usei"> Já conheci, mas não usei</label>
+            <label><input type="radio" name="pergunta2" value="Nunca vi isso acontecer"> Nunca vi isso acontecer</label>
+
+            <label for="pergunta3">3️⃣ Você se sente respeitado e bem tratado por todos aqui na Tech for All?</label>
+            <label><input type="radio" name="pergunta3" value="Sim, sempre"> Sim, sempre</label>
+            <label><input type="radio" name="pergunta3" value="Às vezes"> Às vezes</label>
+            <label><input type="radio" name="pergunta3" value="Não me sinto"> Não me sinto</label>
+
+            <label for="pergunta4">4️⃣ O que você faz para ajudar o meio ambiente no seu dia a dia?</label>
+            <label><input type="radio" name="pergunta4" value="Separar lixo para reciclagem"> Separar lixo para reciclagem</label>
+            <label><input type="radio" name="pergunta4" value="Evitar desperdício de água e luz"> Evitar desperdício de água e luz</label>
+            <label><input type="radio" name="pergunta4" value="Reaproveitar materiais"> Reaproveitar materiais</label>
+            <label><input type="radio" name="pergunta4" value="Não costumo fazer nada disso"> Não costumo fazer nada disso</label>
+
+            <label for="pergunta5">5️⃣ Você considera importante que a Tech for All continue ensinando também sobre sustentabilidade e direitos humanos, além de tecnologia?</label>
+            <label><input type="radio" name="pergunta5" value="Sim"> Sim</label>
+            <label><input type="radio" name="pergunta5" value="Não"> Não</label>
+            <label><input type="radio" name="pergunta5" value="Indiferente"> Indiferente</label>
+
+            <button type="submit">📨 Enviar</button>
+        </form>
+    </section>
+</body>
+</html>
+
