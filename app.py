@@ -1,9 +1,12 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, request, redirect, url_for, render_template, session
 import json
 import hashlib
 from statistics import mean
+from collections import Counter
+
 
 app = Flask(__name__)
+app.secret_key = 'chave_super_secreta_123'
 ARQUIVO_USUARIOS = 'usuarios.json'
 ARQUIVO_QUESTIONARIO = 'questionario.json'
 
@@ -26,6 +29,8 @@ def home():
     return redirect(url_for('cadastro'))
 
 # 📋 Página de Cadastro
+from datetime import datetime
+
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
@@ -33,24 +38,27 @@ def cadastro():
         idade = int(request.form['idade'])
         email = request.form['email']
 
-        # Se o nome não for fornecido, utiliza 'Visitante'
         if not nome.strip():
             nome = 'Visitante'
 
         email_cripto = hashlib.sha256(email.encode()).hexdigest()
 
-        dados = carregar_dados(ARQUIVO_USUARIOS)
+        # ⏱️ Salvar início da sessão e dados temporários
+        session['inicio_sessao'] = datetime.now().isoformat()
+        session['nome'] = nome
+        session['email_cripto'] = email_cripto
 
+        dados = carregar_dados(ARQUIVO_USUARIOS)
         dados.append({
             'nome': nome,
             'idade': idade,
             'email': email_cripto,
-            'tempo_acesso': 30  # valor fictício
+            'tempo_acesso': 0  # será atualizado ao sair
         })
-
         salvar_dados(ARQUIVO_USUARIOS, dados)
 
         return redirect(url_for('index', nome=nome))
+    
     return render_template('cadastro.html')
 
 # 🏠 Página Inicial com mensagem personalizada e gráfico
@@ -88,6 +96,27 @@ def index():
     }
 
     return render_template('index.html', nome=nome, media_faixas=media_faixas)
+@app.route('/sair')
+def sair():
+    if 'inicio_sessao' in session and 'nome' in session and 'email_cripto' in session:
+        inicio = datetime.fromisoformat(session['inicio_sessao'])
+        fim = datetime.now()
+        tempo_acesso = (fim - inicio).total_seconds()
+
+        nome_usuario = session['nome']
+        email_cripto = session['email_cripto']
+
+        dados = carregar_dados(ARQUIVO_USUARIOS)
+
+        for usuario in reversed(dados):  # pega o último registro com o mesmo nome e email
+            if usuario['nome'] == nome_usuario and usuario['email'] == email_cripto:
+                usuario['tempo_acesso'] = round(tempo_acesso, 2)
+                break
+
+        salvar_dados(ARQUIVO_USUARIOS, dados)
+        session.clear()
+
+    return redirect(url_for('index'))
 
 # ⚡ Simulação de Economia de Energia
 @app.route('/simular_energia', methods=['GET', 'POST'])
@@ -135,9 +164,38 @@ def enviar_respostas():
     dados_questionario.append(novo_usuario_questionario)
     salvar_dados(ARQUIVO_QUESTIONARIO, dados_questionario)
 
-    return redirect('/')
+    return redirect('/resultados_questionario')
 
+
+@app.route('/resultados_questionario')
+def resultados_questionario():
+    dados = carregar_dados(ARQUIVO_QUESTIONARIO)
+
+    # Inicializar contadores
+    contagens = {
+        'pergunta1': Counter(),
+        'pergunta2': Counter(),
+        'pergunta3': Counter(),
+        'pergunta4': Counter(),
+        'pergunta5': Counter(),
+    }
+
+    total = len(dados)
+
+    for entrada in dados:
+        respostas = entrada['questionario']
+        for pergunta, resposta in respostas.items():
+            contagens[pergunta][resposta] += 1
+
+    # Calcular porcentagens
+    porcentagens = {}
+    for pergunta, respostas in contagens.items():
+        porcentagens[pergunta] = {
+            opcao: round((qtd / total) * 100, 1) for opcao, qtd in respostas.items()
+        }
+
+    return render_template('resultados_questionario.html', porcentagens=porcentagens)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
+    from collections import Counter

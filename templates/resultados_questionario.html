@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados do Questionário - Tech For All</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #bbd6ff;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #004aad;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #00306e;
+            margin-top: 2rem;
+        }
+
+        section.resultados {
+            background-color: #e3f0ff;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin: 2rem auto;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .grafico-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .grafico-box h4 {
+            color: #004aad;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+            max-width: 400px;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #000000;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        a {
+            color: #004aad;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tech For All</h1>
+    </header>
+
+    <section class="resultados">
+        <h2>📊 Porcentagem das Respostas dos Usuários </h2>
+
+        {% for pergunta, respostas in porcentagens.items() %}
+            <div class="grafico-box">
+                <h4>{{ pergunta.replace('pergunta', 'Pergunta ') }}</h4>
+                <canvas id="{{ pergunta }}"></canvas>
+            </div>
+            <script>
+                const ctx_{{ pergunta }} = document.getElementById('{{ pergunta }}').getContext('2d');
+                new Chart(ctx_{{ pergunta }}, {
+                    type: 'bar',
+                    data: {
+                        labels: {{ respostas.keys()|list|tojson }},
+                        datasets: [{
+                            label: 'Porcentagem (%)',
+                            data: {{ respostas.values()|list|tojson }},
+                            backgroundColor: 'rgba(44, 30, 177, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: context => context.parsed.x + '%'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: '% das respostas'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    autoSkip: false
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+        {% endfor %}
+        
+        <br><a href="/">🔙 Voltar à página inicial</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Tech For All</p>
+    </footer>
+    
+</body>
+</html>

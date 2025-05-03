@@ -1,1 +1,38 @@
-[]
+[
+    {
+        "questionario": {
+            "pergunta1": "Sim",
+            "pergunta2": "Já conheci, mas não usei",
+            "pergunta3": "Sim, sempre",
+            "pergunta4": "Separar lixo para reciclagem",
+            "pergunta5": "Sim"
+        }
+    },
+    {
+        "questionario": {
+            "pergunta1": "Não",
+            "pergunta2": "Já conheci, mas não usei",
+            "pergunta3": "Às vezes",
+            "pergunta4": "Reaproveitar materiais",
+            "pergunta5": "Indiferente"
+        }
+    },
+    {
+        "questionario": {
+            "pergunta1": "Sim",
+            "pergunta2": "Nunca vi isso acontecer",
+            "pergunta3": "Às vezes",
+            "pergunta4": "Reaproveitar materiais",
+            "pergunta5": "Não"
+        }
+    },
+    {
+        "questionario": {
+            "pergunta1": "Sim",
+            "pergunta2": "Já conheci, mas não usei",
+            "pergunta3": "Sim, sempre",
+            "pergunta4": "Não costumo fazer nada disso",
+            "pergunta5": "Sim"
+        }
+    }
+]
